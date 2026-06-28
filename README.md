@@ -19,4 +19,3 @@ A clean local AI terminal and chat app powered by Ollama.
 ```bash
 python3 -m http.server 8080
 
-<img width="734" height="259" alt="backtrace-logo" src="https://github.com/user-attachments/assets/f0dea7a6-21c3-4485-8dea-7c7aadd6200e" />
