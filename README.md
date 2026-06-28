@@ -19,3 +19,5 @@ A clean local AI terminal and chat app powered by Ollama.
 ```bash
 python3 -m http.server 8080
 
+```bash
+Run ollama pull qwen2:0.5b to download a model locally. No API key needed.
