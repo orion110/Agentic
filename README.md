@@ -1,4 +1,4 @@
-[![Agentic.png](https://i.postimg.cc/vTKpRF54/Agentic.png)](https://postimg.cc/FkjPc6Wv) 
+[![Agentic.jpg](https://i.postimg.cc/50BBdwvR/Agentic.jpg)](https://postimg.cc/qh7h261s)
 
 ## Features
 - Terminal mode with streaming responses
