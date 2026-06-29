@@ -1,5 +1,4 @@
-[![backtrace-logo.png](https://i.postimg.cc/9XsWkH0Z/backtrace-logo.png)](https://postimg.cc/NL7qyV1j)
- 
+[![Agentic.png](https://i.postimg.cc/vTKpRF54/Agentic.png)](https://postimg.cc/FkjPc6Wv) 
 
 ## Features
 - Terminal mode with streaming responses
