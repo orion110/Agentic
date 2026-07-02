@@ -1,11 +1,15 @@
-[![Agentic.jpg](https://i.postimg.cc/50BBdwvR/Agentic.jpg)](https://postimg.cc/qh7h261s)
-
+[![Agentic.jpg](https://i.postimg.cc/9036TmhX/Agentic.jpg)](https://postimg.cc/CBNrpV59)
 ## Features
 - Terminal mode with streaming responses
 - Modern chat interface (Orion)
 - Voice input and speech output
 - File uploads
 - Chat history & projects
+
+[![agentic.png](https://i.postimg.cc/jj2YY3X3/agentic.png)](https://postimg.cc/68kmd0FC)
+
+
+[![Untitled.png](https://i.postimg.cc/bJ2XsG41/Untitled.png)](https://postimg.cc/0MxX4NkN)
 
   
 
