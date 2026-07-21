@@ -16,15 +16,16 @@
 
 ## How to Run
 
+```bash
 1. Install and run Ollama
 2. Download `Agentic.html`
 3. run : ./AGENTIC.sh
 
-```bash
 sudo apt install docker.io
 docker pull ollama/ollama
 ollama serve
 ollama pull qwen2:0.5b
 ./Agentic.sh
+```
 
-
+[![hello.webp](https://i.postimg.cc/YSNX95wH/hello.webp)](https://postimg.cc/d71RNS1H)
