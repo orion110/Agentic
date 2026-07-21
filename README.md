@@ -21,10 +21,10 @@
 2. Download `Agentic.html`
 3. run : ./AGENTIC.sh
 
-sudo apt install docker.io
-docker pull ollama/ollama
-ollama serve
+curl -fsSL https://ollama.ai/install.sh | sh
 ollama pull qwen2:0.5b
+ollama serve
+
 ./Agentic.sh
 ```
 
