@@ -814,7 +814,7 @@
     flex-shrink: 0;
     filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18));
   }
-  body.dark-mode .llama-popup-svg { filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)) invert(1); }
+  body.dark-mode .llama-popup-svg { filter: invert(91%) drop-shadow(0 4px 10px rgba(0,0,0,0.5)); }
   .llama-popup-bubble {
     background: #0a0a0a;
     color: #fff;
@@ -1104,8 +1104,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 18px 10px;
+    padding: 20px 10px;
     border: 1px solid var(--border-light);
     border-radius: 12px;
     background: var(--page-bg);
@@ -1114,19 +1115,15 @@
   }
   .extension-card:hover { border-color: var(--border-mid); background: var(--surface); }
   .extension-card-icon {
-    width: 36px; height: 36px;
+    width: 44px; height: 44px;
     border-radius: 50%;
     background: var(--surface);
     border: 1px solid var(--border-mid);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 19px;
     color: var(--text-primary);
-  }
-  .extension-card-name {
-    font-size: 11.5px;
-    font-weight: 500;
-    text-align: center;
   }
   body.dark-mode .extension-card { background: #1a1a1a; border-color: #2a2a2a; }
   body.dark-mode .extension-card:hover { border-color: #444; background: #202020; }
@@ -1313,6 +1310,30 @@
   body.dark-mode .orion-toggle input:checked + .orion-toggle-slider { background: #e8e8e8; }
   body.dark-mode .orion-toggle-slider::before { background: #111; }
   .orion-toggle input:checked + .orion-toggle-slider::before { transform: translateX(16px); }
+
+  .orion-glm-key-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    background: #fff;
+    color: #0a0a0a;
+  }
+  .orion-glm-key-input:focus { outline: none; border-color: #0a0a0a; }
+  body.dark-mode .orion-glm-key-input { background: #1a1a1a; border-color: #333; color: #e8e8e8; }
+  body.dark-mode .orion-glm-key-input:focus { border-color: #888; }
+  .orion-glm-model-map {
+    margin-top: 8px;
+    font-size: 11.5px;
+    color: #999;
+    line-height: 1.6;
+  }
+  body.dark-mode .orion-glm-model-map { color: #666; }
+
   #chat-mode-panel {
     display: none;
     position: fixed;
@@ -1386,7 +1407,7 @@
     transition: background 0.15s, color 0.15s, border-color 0.15s;
     position: relative;
   }
-  .cm-server-icon:hover { border-color: var(--black); color: var(--black); }
+  .cm-server-icon:hover { border-color: var(--text-primary); color: var(--text-primary); }
   .cm-server-icon.active { background: var(--black); border-color: var(--black); color: var(--white); }
   .cm-server-icon-img {
     width: 100%;
@@ -1403,7 +1424,7 @@
     transform: translateY(-50%);
     width: 3px;
     height: 20px;
-    background: var(--black);
+    background: var(--text-primary);
   }
   /* Channel sidebar */
   .cm-channels {
@@ -1467,11 +1488,11 @@
   .cm-channel span::before { content: '#'; color: var(--text-muted); margin-right: 1px; }
   .cm-channel svg { color: var(--text-muted); flex-shrink: 0; }
   .cm-channel:hover { background: var(--page-bg); color: var(--text-primary); }
-  .cm-channel.active { background: var(--page-bg); color: var(--black); font-weight: 700; border-left-color: var(--black); }
-  .cm-channel.active svg { color: var(--black); }
+  .cm-channel.active { background: var(--page-bg); color: var(--text-primary); font-weight: 700; border-left-color: var(--text-primary); }
+  .cm-channel.active svg { color: var(--text-primary); }
   .cm-channel[data-persona="agentic"] { position: relative; }
-  .cm-voice-btn.cm-voice-connected { color: var(--black); font-weight: 700; }
-  .cm-voice-btn.cm-voice-connected svg { color: var(--black); }
+  .cm-voice-btn.cm-voice-connected { color: var(--text-primary); font-weight: 700; }
+  .cm-voice-btn.cm-voice-connected svg { color: var(--text-primary); }
   .cm-voice-btn span::before { content: none; }
   .cm-voice-participants {
     display: flex;
@@ -1489,18 +1510,33 @@
     from { opacity: 0; transform: translateY(-4px) scale(0.85); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
   }
-  .cm-voice-participant .cm-avatar {
-    width: 20px; height: 20px;
-    border-radius: 6px;
-    font-size: 9px;
-  }
   .cm-voice-participant-name {
     font-size: 12px;
     color: var(--text-secondary);
   }
-  .cm-voice-btn:hover { color: var(--black); }
+  .cm-voice-bar {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .cm-voice-bar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    border: 1px solid var(--border-mid);
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+  }
+  .cm-voice-bar-btn:hover { background: var(--page-bg); color: var(--text-primary); }
+  .cm-voice-bar-btn.mic-muted { color: #e53e3e; border-color: #e53e3e; }
+  .cm-voice-bar-leave:hover { color: #e53e3e; border-color: #e53e3e; }
+  .cm-voice-btn:hover { color: var(--text-primary); }
   .cm-voice-btn svg { color: var(--text-muted); }
-  .cm-voice-btn:hover svg { color: var(--black); }
+  .cm-voice-btn:hover svg { color: var(--text-primary); }
 
   /* Main channel area */
   .cm-main {
@@ -1543,7 +1579,7 @@
     cursor: pointer;
     transition: background 0.12s, color 0.12s;
   }
-  .cm-header-btn:hover { background: var(--page-bg); color: var(--black); }
+  .cm-header-btn:hover { background: var(--page-bg); color: var(--text-primary); }
   .cm-messages {
     flex: 1;
     overflow-y: auto;
@@ -1582,6 +1618,7 @@
     padding: 10px 0;
   }
   .cm-message .cm-avatar { width: 34px; height: 34px; font-size: 13px; border-radius: 8px; }
+  .cm-message-you { padding-left: 46px; }
   .cm-message-body { min-width: 0; }
   .cm-message-head {
     display: flex;
@@ -1613,7 +1650,7 @@
     padding: 4px;
     border-radius: 6px;
   }
-  .cm-composer-add:hover, .cm-composer-send:hover { color: var(--black); }
+  .cm-composer-add:hover, .cm-composer-send:hover { color: var(--text-primary); }
   .cm-composer input {
     flex: 1;
     border: none;
@@ -1697,14 +1734,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    font-weight: 700;
-    font-size: 13px;
+    color: var(--text-primary);
+    background: var(--page-bg);
     flex-shrink: 0;
     border: 1px solid var(--border-mid);
     box-sizing: border-box;
   }
-  .cm-avatar.cm-avatar-you { background: var(--surface); color: var(--text-primary); }
+  .cm-member-logo, .cm-voice-participant-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    flex-shrink: 0;
+  }
   .cm-presence {
     position: absolute;
     right: -2px; bottom: -2px;
@@ -1712,7 +1754,7 @@
     border-radius: 3px;
     border: 2px solid var(--surface);
   }
-  .cm-presence.online { background: var(--black); }
+  .cm-presence.online { background: var(--text-primary); }
   .cm-presence.offline { background: var(--text-muted); }
   .cm-member-info { display: flex; flex-direction: column; min-width: 0; }
   .cm-member-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
@@ -2003,6 +2045,15 @@
   .orion-followup-chip:hover { border-color: #000; background: #000; color: #fff; }
   body.dark-mode .orion-followup-chip { background: #1e1e1e; border-color: #333; color: #bbb; }
   body.dark-mode .orion-followup-chip:hover { background: #fff; border-color: #fff; color: #000; }
+
+  .orion-glm-fallback-tag {
+    margin-top: 6px;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: #999;
+    font-style: italic;
+  }
+  body.dark-mode .orion-glm-fallback-tag { color: #666; }
 
   /* Messages */
   #orionMessages {
@@ -2608,9 +2659,11 @@
 
   <!-- Mode Toggle -->
   <div class="mode-toggle">
-    <button type="button" class="mode-btn" id="chatModeBtn" onclick="switchMode('chat')">
+    <button type="button" class="mode-btn mode-btn-icon" id="darkModeNavBtn" onclick="toggleDarkModeNav()" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button type="button" class="mode-btn mode-btn-icon" id="chatModeBtn" onclick="switchMode('chat')" aria-label="Chat" title="Chat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Chat
     </button>
     <button type="button" class="mode-btn mode-btn-icon active" id="termModeBtn" onclick="switchMode('terminal')" aria-label="Terminal" title="Terminal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
@@ -2653,7 +2706,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
       </button>
       <div class="icon-rail-divider"></div>
-      <button class="icon-rail-btn" onclick="orionToggleCustomize()" aria-label="Settings">
+      <button class="icon-rail-btn" id="railSettingsBtn" onclick="orionToggleSettings()" aria-label="Settings">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         <span class="icon-rail-tooltip">Settings</span>
       </button>
@@ -2795,7 +2848,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="10" height="10"><polyline points="9 18 15 12 9 6"/></svg>
         <span>Voice</span>
       </div>
-      <button class="cm-channel cm-voice-btn" id="cmVoiceBtn" onclick="openVoiceMode()" title="Start a voice chat with the active persona">
+      <button class="cm-channel cm-voice-btn" id="cmVoiceBtn" onclick="cmToggleVoice()" title="Join voice chat with the active persona">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><line x1="4" y1="10" x2="4" y2="14"/><line x1="9" y1="6" x2="9" y2="18"/><line x1="14" y1="3" x2="14" y2="21"/><line x1="19" y1="7" x2="19" y2="17"/></svg>
         <span>voice chat</span>
       </button>
@@ -2810,7 +2863,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <span id="cmHeaderChannelName">agentic</span>
       </div>
-      <button class="cm-header-btn" onclick="orionToggleCustomize()" aria-label="Settings" title="Settings">
+      <button class="cm-header-btn" onclick="orionToggleSettings()" aria-label="Settings" title="Settings">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </button>
     </div>
@@ -3191,7 +3244,7 @@ const SLASH_COMMANDS = {
     desc: 'models — list available Ollama models',
     run: async () => {
       try {
-        const res = await fetch('http://localhost:11434/api/tags');
+        const res = await fetch(`${ollamaHost()}/api/tags`);
         const data = await res.json();
         if (data.models && data.models.length) {
           print('available models:', 'info');
@@ -3216,7 +3269,7 @@ const SLASH_COMMANDS = {
         info.push({ text: 'total sessions      ' + Object.keys(db).length, style: 'output' });
       }
       try {
-        const psRes = await fetch('http://localhost:11434/api/ps');
+        const psRes = await fetch(`${ollamaHost()}/api/ps`);
         const psData = await psRes.json();
         info.push({ text: 'ollama daemon       online', style: 'output' });
         if (psData.models && psData.models.length) {
@@ -3413,6 +3466,368 @@ function getActiveConstellationKey() {
   let saved = null;
   try { saved = (typeof localStorage !== 'undefined') ? localStorage.getItem('AGENTIC_BRAND_LOGO_V2') : null; } catch (e) { /* ignore */ }
   return CONSTELLATION_PERSONALITIES[saved] ? saved : 'agentic';
+}
+
+// ─── Ollama host ─────────────────────────────────────────────────────────
+// Defaults to the local install, but this is a knob in Settings so a
+// remote/cloud Ollama box (homelab, rented GPU, etc.) can be used instead —
+// still "real local-style models," just not necessarily on this machine.
+// This is tried before any cloud fallback provider below.
+const OLLAMA_DEFAULT_HOST = 'http://localhost:11434';
+function ollamaHost() {
+  try {
+    const saved = (typeof localStorage !== 'undefined') ? localStorage.getItem('AGENTIC_OLLAMA_HOST') : null;
+    return (saved && saved.trim()) ? saved.trim().replace(/\/+$/, '') : OLLAMA_DEFAULT_HOST;
+  } catch (e) { return OLLAMA_DEFAULT_HOST; }
+}
+function ollamaSetHost(url) {
+  try {
+    if (!(typeof localStorage !== 'undefined')) return;
+    const trimmed = (url || '').trim().replace(/\/+$/, '');
+    if (!trimmed || trimmed === OLLAMA_DEFAULT_HOST) localStorage.removeItem('AGENTIC_OLLAMA_HOST');
+    else localStorage.setItem('AGENTIC_OLLAMA_HOST', trimmed);
+  } catch (e) { /* ignore */ }
+}
+
+// ─── Whisper (STT) + Kokoro (TTS) hosts ─────────────────────────────────
+// Voice mode talks to two small local servers by default (Whisper for
+// transcription, Kokoro for speech synthesis). Like the Ollama host above,
+// these are knobs in Settings so voice mode isn't stuck assuming everyone
+// runs both servers on this exact machine.
+const WHISPER_DEFAULT_HOST = 'http://localhost:5051';
+const KOKORO_DEFAULT_HOST = 'http://localhost:5050';
+function whisperHost() {
+  try {
+    const saved = (typeof localStorage !== 'undefined') ? localStorage.getItem('AGENTIC_WHISPER_HOST') : null;
+    return (saved && saved.trim()) ? saved.trim().replace(/\/+$/, '') : WHISPER_DEFAULT_HOST;
+  } catch (e) { return WHISPER_DEFAULT_HOST; }
+}
+function whisperSetHost(url) {
+  try {
+    if (!(typeof localStorage !== 'undefined')) return;
+    const trimmed = (url || '').trim().replace(/\/+$/, '');
+    if (!trimmed || trimmed === WHISPER_DEFAULT_HOST) localStorage.removeItem('AGENTIC_WHISPER_HOST');
+    else localStorage.setItem('AGENTIC_WHISPER_HOST', trimmed);
+  } catch (e) { /* ignore */ }
+}
+function kokoroHost() {
+  try {
+    const saved = (typeof localStorage !== 'undefined') ? localStorage.getItem('AGENTIC_KOKORO_HOST') : null;
+    return (saved && saved.trim()) ? saved.trim().replace(/\/+$/, '') : KOKORO_DEFAULT_HOST;
+  } catch (e) { return KOKORO_DEFAULT_HOST; }
+}
+function kokoroSetHost(url) {
+  try {
+    if (!(typeof localStorage !== 'undefined')) return;
+    const trimmed = (url || '').trim().replace(/\/+$/, '');
+    if (!trimmed || trimmed === KOKORO_DEFAULT_HOST) localStorage.removeItem('AGENTIC_KOKORO_HOST');
+    else localStorage.setItem('AGENTIC_KOKORO_HOST', trimmed);
+  } catch (e) { /* ignore */ }
+}
+
+// ─── Per-persona Kokoro voice IDs ────────────────────────────────────────
+// Defaults match the standard Kokoro voice pack (af_*/am_* etc.) and are
+// picked to loosely match each constellation's "voice" description above,
+// but every one of them is overridable in Settings since actual available
+// voices depend on what the person's own Kokoro server has loaded.
+const KOKORO_VOICE_DEFAULTS = {
+  agentic: 'af_heart',
+  orion: 'am_michael',
+  carina: 'af_bella',
+  gemini: 'af_nicole'
+};
+function kokoroVoiceFor(key) {
+  try {
+    const saved = (typeof localStorage !== 'undefined') ? localStorage.getItem('AGENTIC_KOKORO_VOICE_' + key) : null;
+    return (saved && saved.trim()) ? saved.trim() : (KOKORO_VOICE_DEFAULTS[key] || KOKORO_VOICE_DEFAULTS.agentic);
+  } catch (e) { return KOKORO_VOICE_DEFAULTS[key] || KOKORO_VOICE_DEFAULTS.agentic; }
+}
+function kokoroSetVoice(key, voiceId) {
+  try {
+    if (!(typeof localStorage !== 'undefined')) return;
+    const trimmed = (voiceId || '').trim();
+    if (!trimmed || trimmed === KOKORO_VOICE_DEFAULTS[key]) localStorage.removeItem('AGENTIC_KOKORO_VOICE_' + key);
+    else localStorage.setItem('AGENTIC_KOKORO_VOICE_' + key, trimmed);
+  } catch (e) { /* ignore */ }
+}
+
+// ─── Cloud fallback providers ────────────────────────────────────────────
+// Every constellation is normally backed by a local Ollama model family
+// (Orion: Qwen/Llama, Carina: Mistral, Gemini: Gemma, Agentic: mixed). If
+// Ollama isn't reachable — not installed, not running, or the request
+// otherwise fails — Agentic can fall back to a small chain of cloud
+// providers instead of just erroring out. Each provider is individually
+// toggled on/off with its own API key in Settings, and each maps its own
+// model per constellation so the fallback still roughly matches that
+// persona's weight/purpose. Providers are tried in the order listed below;
+// the first enabled provider with a key that succeeds wins.
+const FALLBACK_PROVIDERS = [
+  {
+    id: 'glm', label: 'GLM (z.ai)', kind: 'openai',
+    keyKey: 'AGENTIC_ZAI_API_KEY', enabledKey: 'AGENTIC_GLM_FALLBACK',
+    endpoint: 'https://api.z.ai/api/paas/v4/chat/completions',
+    models: {
+      agentic: 'glm-4.5-flash', // neutral shell — fast, free-tier friendly
+      orion:   'glm-4.6',       // coding / engineering — flagship reasoning model
+      carina:  'glm-4.5',       // writing / brainstorming — balanced general model
+      gemini:  'glm-4.5-air'    // learning / explaining — lighter, still capable
+    }
+  },
+  {
+    id: 'groq', label: 'Groq', kind: 'openai',
+    keyKey: 'AGENTIC_GROQ_API_KEY', enabledKey: 'AGENTIC_GROQ_FALLBACK',
+    endpoint: 'https://api.groq.com/openai/v1/chat/completions',
+    models: {
+      agentic: 'llama-3.1-8b-instant',   // fast, free-tier friendly
+      orion:   'qwen-2.5-coder-32b',     // coding — real Qwen, matches Orion's family
+      carina:  'llama-3.3-70b-versatile',// closest general model Groq hosts (no Mistral on Groq)
+      gemini:  'gemma2-9b-it'            // real Gemma, matches Gemini's family
+    }
+  },
+  {
+    id: 'mistral', label: 'Mistral (La Plateforme)', kind: 'openai',
+    keyKey: 'AGENTIC_MISTRAL_API_KEY', enabledKey: 'AGENTIC_MISTRAL_FALLBACK',
+    endpoint: 'https://api.mistral.ai/v1/chat/completions',
+    models: {
+      agentic: 'mistral-small-latest',
+      orion:   'codestral-latest',       // Mistral's dedicated coding model — great fit for Orion
+      carina:  'mistral-large-latest',   // official Mistral — exact family match for Carina
+      gemini:  'mistral-small-latest'
+    }
+  },
+  {
+    id: 'google', label: 'Google AI (Gemini)', kind: 'google',
+    keyKey: 'AGENTIC_GOOGLE_API_KEY', enabledKey: 'AGENTIC_GOOGLE_FALLBACK',
+    models: {
+      agentic: 'gemini-2.0-flash',
+      orion:   'gemini-2.0-flash',
+      carina:  'gemini-2.0-flash',
+      gemini:  'gemini-2.0-flash'         // real Gemini model for the Gemini constellation
+    }
+  },
+  {
+    id: 'openrouter', label: 'OpenRouter', kind: 'openai',
+    keyKey: 'AGENTIC_OPENROUTER_API_KEY', enabledKey: 'AGENTIC_OPENROUTER_FALLBACK',
+    endpoint: 'https://openrouter.ai/api/v1/chat/completions',
+    models: {
+      agentic: 'meta-llama/llama-3.1-8b-instruct:free',
+      orion:   'qwen/qwen-2.5-coder-32b-instruct',
+      carina:  'mistralai/mistral-large',
+      gemini:  'google/gemma-2-9b-it'
+    }
+  }
+];
+
+function providerById(id) { return FALLBACK_PROVIDERS.find(p => p.id === id) || null; }
+function providerGetApiKey(provider) {
+  try { return (typeof localStorage !== 'undefined') ? (localStorage.getItem(provider.keyKey) || '') : ''; }
+  catch (e) { return ''; }
+}
+function providerSetApiKey(provider, key) {
+  try { if (typeof localStorage !== 'undefined') localStorage.setItem(provider.keyKey, (key || '').trim()); }
+  catch (e) { /* ignore */ }
+}
+function providerIsEnabled(provider) {
+  try { return (typeof localStorage !== 'undefined') && localStorage.getItem(provider.enabledKey) === '1'; }
+  catch (e) { return false; }
+}
+function providerSetEnabled(provider, on) {
+  try { if (typeof localStorage !== 'undefined') localStorage.setItem(provider.enabledKey, on ? '1' : '0'); }
+  catch (e) { /* ignore */ }
+}
+function providerModelFor(provider, constellationKey) {
+  return provider.models[constellationKey] || provider.models.agentic;
+}
+// Generic hooks used by Settings-panel inputs (data-provider="groq" etc.),
+// so adding a new provider to the chain never requires new per-provider
+// onchange handlers.
+function providerSetKeyById(id, key) { const p = providerById(id); if (p) providerSetApiKey(p, key); }
+function providerSetEnabledById(id, on) { const p = providerById(id); if (p) providerSetEnabled(p, on); }
+
+// Back-compat aliases — GLM was the first fallback shipped and some call
+// sites/markup still reference it by name directly.
+function glmGetApiKey() { return providerGetApiKey(providerById('glm')); }
+function glmSetApiKey(key) { providerSetApiKey(providerById('glm'), key); }
+function glmIsFallbackEnabled() { return providerIsEnabled(providerById('glm')); }
+function glmSetFallbackEnabled(on) { providerSetEnabled(providerById('glm'), on); }
+function glmModelForKey(key) { return providerModelFor(providerById('glm'), key); }
+
+// Any cloud fallback currently enabled with a key set? Used to decide
+// whether "could not reach Ollama" errors should mention the fallback chain.
+function anyFallbackEnabled() {
+  return FALLBACK_PROVIDERS.some(p => providerIsEnabled(p) && providerGetApiKey(p));
+}
+
+// Streams a chat completion from an OpenAI-compatible endpoint (GLM, Groq,
+// Mistral, OpenRouter all speak this dialect). `onToken(deltaText,
+// fullTextSoFar)` is called as chunks arrive, mirroring the shape callers
+// already use for Ollama's streaming NDJSON responses.
+async function openAiCompatChatStream({ endpoint, apiKey, model, messages, onToken, signal, label }) {
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + apiKey
+    },
+    body: JSON.stringify({ model, messages, stream: true }),
+    signal
+  });
+  if (!res.ok) {
+    if (res.status === 429) throw new Error(`${label} error 429 — rate limited or out of quota for ${model}`);
+    throw new Error(`${label} error ` + res.status);
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let fullReply = '';
+  let buf = '';
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += decoder.decode(value, { stream: true });
+    const lines = buf.split('\n');
+    buf = lines.pop(); // hold onto a possibly-incomplete trailing line
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed.startsWith('data:')) continue;
+      const payload = trimmed.slice(5).trim();
+      if (!payload || payload === '[DONE]') continue;
+      try {
+        const evt = JSON.parse(payload);
+        const delta = evt.choices && evt.choices[0] && evt.choices[0].delta && evt.choices[0].delta.content;
+        if (delta) {
+          fullReply += delta;
+          if (onToken) onToken(delta, fullReply);
+        }
+      } catch { /* ignore partial JSON lines */ }
+    }
+  }
+  return fullReply;
+}
+
+// Streams a chat completion from Google's Gemini API, which uses a
+// different request/response shape than the OpenAI dialect (contents/parts
+// instead of messages, a separate systemInstruction field, and its own SSE
+// event shape) — kept as its own function rather than shoehorned into
+// openAiCompatChatStream.
+async function googleGeminiChatStream({ apiKey, model, messages, onToken, signal }) {
+  const systemText = messages.filter(m => m.role === 'system').map(m => m.content).join('\n\n');
+  const contents = messages
+    .filter(m => m.role !== 'system')
+    .map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] }));
+
+  const body = { contents };
+  if (systemText) body.systemInstruction = { parts: [{ text: systemText }] };
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    signal
+  });
+  if (!res.ok) {
+    if (res.status === 429) throw new Error(`Google AI error 429 — rate limited or out of quota for ${model}`);
+    throw new Error('Google AI error ' + res.status);
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let fullReply = '';
+  let buf = '';
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += decoder.decode(value, { stream: true });
+    const lines = buf.split('\n');
+    buf = lines.pop();
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed.startsWith('data:')) continue;
+      const payload = trimmed.slice(5).trim();
+      if (!payload) continue;
+      try {
+        const evt = JSON.parse(payload);
+        const cand = evt.candidates && evt.candidates[0];
+        const part = cand && cand.content && cand.content.parts && cand.content.parts[0];
+        const delta = part && part.text;
+        if (delta) {
+          fullReply += delta;
+          if (onToken) onToken(delta, fullReply);
+        }
+      } catch { /* ignore partial JSON lines */ }
+    }
+  }
+  return fullReply;
+}
+
+// Dispatches to whichever wire format a given provider speaks.
+async function callProvider(provider, messages, constellationKey, onToken, signal) {
+  const apiKey = providerGetApiKey(provider);
+  if (!apiKey) throw new Error(`No ${provider.label} API key configured`);
+  const model = providerModelFor(provider, constellationKey);
+  if (provider.kind === 'google') {
+    return await googleGeminiChatStream({ apiKey, model, messages, onToken, signal });
+  }
+  return await openAiCompatChatStream({ endpoint: provider.endpoint, apiKey, model, messages, onToken, signal, label: provider.label });
+}
+
+// Shared "try Ollama, then walk the enabled cloud fallback chain" streaming
+// call. `onToken(deltaText, fullTextSoFar)` fires for every chunk from
+// whichever backend ends up serving the request. Returns
+// { text, source, providerLabel, model } where source is 'ollama' or a
+// provider id ('glm', 'groq', 'mistral', 'google', 'openrouter'). AbortErrors
+// (the user hit Stop) are never treated as a reason to fall back.
+async function chatCompletionStream({ model, messages, options, signal, constellationKey, onToken }) {
+  try {
+    const res = await fetch(`${ollamaHost()}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ model, stream: true, messages }, options ? { options } : {})),
+      signal
+    });
+    if (!res.ok) throw new Error('Ollama error ' + res.status);
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let fullReply = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const lines = decoder.decode(value, { stream: true }).split('\n').filter(Boolean);
+      for (const line of lines) {
+        try {
+          const evt = JSON.parse(line);
+          if (evt.message && evt.message.content) {
+            fullReply += evt.message.content;
+            if (onToken) onToken(evt.message.content, fullReply);
+          }
+        } catch { /* ignore partial JSON lines */ }
+      }
+    }
+    return { text: fullReply, source: 'ollama' };
+  } catch (err) {
+    if (err.name === 'AbortError') throw err;
+
+    let lastErr = err;
+    for (const provider of FALLBACK_PROVIDERS) {
+      if (!providerIsEnabled(provider)) continue;
+      if (!providerGetApiKey(provider)) continue;
+      try {
+        const fullReply = await callProvider(provider, messages, constellationKey, onToken, signal);
+        return {
+          text: fullReply,
+          source: provider.id,
+          providerLabel: provider.label,
+          model: providerModelFor(provider, constellationKey)
+        };
+      } catch (e2) {
+        if (e2.name === 'AbortError') throw e2;
+        lastErr = e2; // try the next provider in the chain
+      }
+    }
+    throw lastErr;
+  }
 }
 
 function getBrandName() {
@@ -3777,7 +4192,7 @@ async function sendToOllama(prompt) {
   let termStreamStarted = false;
 
   try {
-    const res = await fetch('http://localhost:11434/api/chat', {
+    const res = await fetch(`${ollamaHost()}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -4080,8 +4495,9 @@ input.addEventListener('keydown', async (e) => {
 });
 
 // ── VOICE MODE ──
-const KOKORO_URL = 'http://localhost:5050/speak';
-const WHISPER_URL = 'http://localhost:5051/transcribe';
+// Whisper/Kokoro endpoints are built from the configurable hosts above
+// (see whisperHost()/kokoroHost()), not hardcoded, so voice mode works
+// against remote/cloud STT+TTS boxes too, not just this machine.
 let voiceMicActive = false;
 let voiceAudio = null;
 let voiceCurrentMode = null; // 'terminal' or 'chat'
@@ -4170,6 +4586,22 @@ function setOrbState(state) {
   orb.className = 'voice-orb' + (state !== 'idle' ? ' ' + state : '');
 }
 
+let cmLogoUidCounter = 0;
+function cmPersonaLogoSVG(key, size) {
+  const def = ORION_LOGO_SVGS[key];
+  if (!def || !def.icon) return '';
+  const uid = 'cmlogo' + (cmLogoUidCounter++);
+  let markup = def.icon;
+  const idMatch = markup.match(/id="([^"]+)"/);
+  if (idMatch) {
+    const origId = idMatch[1];
+    const uniqueId = origId + '-' + uid;
+    markup = markup.split('id="' + origId + '"').join('id="' + uniqueId + '"');
+    markup = markup.split('#' + origId).join('#' + uniqueId);
+  }
+  return '<svg viewBox="' + def.iconViewBox + '" width="' + size + '" height="' + size + '">' + markup + '</svg>';
+}
+
 function cmJoinVoice() {
   const btn = document.getElementById('cmVoiceBtn');
   const wrap = document.getElementById('cmVoiceParticipants');
@@ -4178,15 +4610,18 @@ function cmJoinVoice() {
   const persona = CONSTELLATION_PERSONALITIES[key];
   if (!persona) return;
   if (btn) btn.classList.add('cm-voice-connected');
-  const personaInitial = persona.name.trim().charAt(0).toUpperCase();
   wrap.innerHTML =
     '<div class="cm-voice-participant">' +
-      '<span class="cm-avatar" style="background:' + (cmAvatarColors[key] || '#6b6b6b') + ';">' + personaInitial + '</span>' +
+      '<span class="cm-voice-participant-logo">' + cmPersonaLogoSVG(key, 18) + '</span>' +
       '<span class="cm-voice-participant-name">' + persona.name + '</span>' +
     '</div>' +
-    '<div class="cm-voice-participant" style="animation-delay:0.06s;">' +
-      '<span class="cm-avatar cm-avatar-you">Y</span>' +
-      '<span class="cm-voice-participant-name">You</span>' +
+    '<div class="cm-voice-bar">' +
+      '<button type="button" class="cm-voice-bar-btn" id="cmVoiceMuteBtn" onclick="toggleVoiceMic()" title="Mute mic" aria-label="Mute mic">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>' +
+      '</button>' +
+      '<button type="button" class="cm-voice-bar-btn cm-voice-bar-leave" onclick="closeVoiceMode()" title="Disconnect" aria-label="Disconnect">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a1 1 0 0 1 1.11-.21 12 12 0 0 0 3.78.6 1 1 0 0 1 1 1V19a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1h2.97a1 1 0 0 1 1 1 12 12 0 0 0 .6 3.78 1 1 0 0 1-.21 1.11z"/><line x1="1" y1="1" x2="23" y2="23"/></svg>' +
+      '</button>' +
     '</div>';
 }
 
@@ -4197,38 +4632,55 @@ function cmLeaveVoice() {
   if (wrap) wrap.innerHTML = '';
 }
 
+function cmToggleVoice() {
+  const btn = document.getElementById('cmVoiceBtn');
+  if (btn && btn.classList.contains('cm-voice-connected')) {
+    closeVoiceMode();
+  } else {
+    openVoiceMode();
+  }
+}
+
 function openVoiceMode() {
   voiceCurrentMode = currentMode; // which mode triggered it
+  setOrbState('idle');
+  vmStartVisualizer();
+  startVoiceMic();
+  if (voiceCurrentMode === 'community') {
+    // Discord-style: join the voice channel in place, no overlay takeover.
+    cmJoinVoice();
+    return;
+  }
   const pill = document.getElementById('voice-overlay');
   if (!pill) return;
   pill.style.display = 'flex';
   setVoiceStatus('Waiting...');
   setVoiceTranscript('');
-  setOrbState('idle');
-  vmStartVisualizer();
-  startVoiceMic();
-  if (voiceCurrentMode === 'community') cmJoinVoice();
 }
 
 function closeVoiceMode() {
   stopVoiceMic();
   vmStopVisualizer();
   if (voiceAudio) { voiceAudio.pause(); voiceAudio = null; }
-  const pill = document.getElementById('voice-overlay');
   if (voiceCurrentMode === 'community') cmLeaveVoice();
+  const pill = document.getElementById('voice-overlay');
   if (!pill) return;
   pill.style.display = 'none';
   setOrbState('idle');
 }
 
 function toggleVoiceMic() {
+  const overlayBtn = document.getElementById('voice-mic-toggle-btn');
+  const cmBtn = document.getElementById('cmVoiceMuteBtn');
   if (voiceMicActive) {
     stopVoiceMic();
     setVoiceStatus('Muted');
-    document.getElementById('voice-mic-toggle-btn').classList.add('mic-muted');
+    if (overlayBtn) overlayBtn.classList.add('mic-muted');
+    if (cmBtn) cmBtn.classList.add('mic-muted');
   } else {
     startVoiceMic();
-    document.getElementById('voice-mic-toggle-btn').classList.remove('mic-muted');
+    if (overlayBtn) overlayBtn.classList.remove('mic-muted');
+    if (cmBtn) cmBtn.classList.remove('mic-muted');
   }
 }
 
@@ -4317,7 +4769,7 @@ async function vmSendToWhisper(blob) {
   try {
     const form = new FormData();
     form.append('audio', blob, 'audio.webm');
-    const res = await fetch(WHISPER_URL, { method: 'POST', body: form });
+    const res = await fetch(`${whisperHost()}/transcribe`, { method: 'POST', body: form });
     const data = await res.json();
     if (data.transcript && data.transcript.trim()) {
       setVoiceTranscript(data.transcript.trim());
@@ -4336,11 +4788,11 @@ async function vmSendToWhisper(blob) {
 function vmMuteMic() { if (vmAudioStream) vmAudioStream.getAudioTracks().forEach(t => t.enabled = false); }
 function vmUnmuteMic() { if (vmAudioStream) vmAudioStream.getAudioTracks().forEach(t => t.enabled = true); }
 
-function vmPrefetchKokoro(text) {
-  return fetch(KOKORO_URL, {
+function vmPrefetchKokoro(text, voiceId) {
+  return fetch(`${kokoroHost()}/speak`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text })
+    body: JSON.stringify({ text, voice: voiceId || KOKORO_VOICE_DEFAULTS.agentic })
   }).then(r => { if (!r.ok) throw new Error(); return r.blob(); })
     .then(b => { const a = new Audio(URL.createObjectURL(b)); a.load(); return a; })
     .catch(() => null);
@@ -4375,6 +4827,12 @@ async function vmHandleTranscript(transcript) {
   setVoiceTranscript('');
   setOrbState('thinking');
 
+  // Which persona is "speaking" determines which Kokoro voice to use —
+  // the active channel in Community mode, or the current constellation
+  // brand in Chat/Terminal mode.
+  const voicePersonaKey = voiceCurrentMode === 'community' ? cmActivePersona : getActiveConstellationKey();
+  const voiceId = kokoroVoiceFor(voicePersonaKey);
+
   const pipeline = [];
   let playing = false;
   let sentenceBuffer = '';
@@ -4385,7 +4843,7 @@ async function vmHandleTranscript(transcript) {
   function flushSentence(text) {
     const clean = cleanText(text);
     if (clean.length < 4) return;
-    const audioPromise = vmPrefetchKokoro(clean);
+    const audioPromise = vmPrefetchKokoro(clean, voiceId);
     pipeline.push({ text: clean, audioPromise });
     drainPipeline();
   }
@@ -4423,7 +4881,7 @@ async function vmHandleTranscript(transcript) {
       output.appendChild(streamLine);
       output.scrollTop = output.scrollHeight;
 
-      const res = await fetch('http://localhost:11434/api/generate', {
+      const res = await fetch(`${ollamaHost()}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ model: currentModel, prompt: transcript, stream: true })
@@ -4473,7 +4931,7 @@ async function vmHandleTranscript(transcript) {
         { role: 'system', content: buildSystemPrompt(key) },
         ...state.history,
       ];
-      const res = await fetch('http://localhost:11434/api/chat', {
+      const res = await fetch(`${ollamaHost()}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ model: orionSelectedModel, stream: true, messages }),
@@ -4516,7 +4974,7 @@ async function vmHandleTranscript(transcript) {
         { role: 'system', content: 'You are a helpful, concise assistant. Never greet the user. Never say hello or introduce yourself. Respond only to what was asked. Be direct and brief.' },
         ...orionHistory
       ];
-      const res = await fetch('http://localhost:11434/api/chat', {
+      const res = await fetch(`${ollamaHost()}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ model: orionSelectedModel, stream: true, messages }),
@@ -4643,16 +5101,15 @@ function cmMarkActivity() {
 
 function cmMakeMessageEl(who, text, time) {
   const persona = who === 'user' ? null : CONSTELLATION_PERSONALITIES[who];
-  const initial = persona ? persona.name.trim().charAt(0).toUpperCase() : 'Y';
   const isYou = who === 'user';
-  const color = persona ? (cmAvatarColors[who] || '#6b6b6b') : null;
-  const name = persona ? persona.name : 'You';
+  const logo = persona ? cmPersonaLogoSVG(who, 20) : '';
+  const name = persona ? persona.name : '';
   const el = document.createElement('div');
-  el.className = 'cm-message';
+  el.className = 'cm-message' + (isYou ? ' cm-message-you' : '');
   el.innerHTML =
-    '<span class="cm-avatar' + (isYou ? ' cm-avatar-you' : '') + '"' + (color ? ' style="background:' + color + ';"' : '') + '>' + initial + '</span>' +
+    (isYou ? '' : '<span class="cm-avatar">' + logo + '</span>') +
     '<div class="cm-message-body">' +
-      '<div class="cm-message-head"><span class="cm-message-author">' + name + '</span>' +
+      '<div class="cm-message-head">' + (name ? '<span class="cm-message-author">' + name + '</span>' : '') +
       '<span class="cm-message-time"></span></div>' +
       '<div class="cm-message-text"></div>' +
     '</div>';
@@ -4715,34 +5172,30 @@ async function cmStreamPersonaReply(key, systemPromptSuffix) {
 
   let fullReply = '';
   try {
-    const res = await fetch('http://localhost:11434/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: orionSelectedModel, stream: true, messages, options: { num_predict: 2048 } }),
-    });
-    if (!res.ok) throw new Error('Ollama error ' + res.status);
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      const lines = decoder.decode(value, { stream: true }).split('\n').filter(Boolean);
-      for (const line of lines) {
-        try {
-          const evt = JSON.parse(line);
-          if (evt.message?.content) {
-            fullReply += evt.message.content;
-            if (content) {
-              orionRenderMarkdown(content, fullReply);
-              msgs.scrollTop = msgs.scrollHeight;
-            }
-          }
-        } catch { /* ignore partial JSON lines */ }
+    const result = await chatCompletionStream({
+      model: orionSelectedModel,
+      messages,
+      options: { num_predict: 2048 },
+      constellationKey: key,
+      onToken: (delta, soFar) => {
+        fullReply = soFar;
+        if (content) {
+          orionRenderMarkdown(content, fullReply);
+          msgs.scrollTop = msgs.scrollHeight;
+        }
       }
+    });
+    fullReply = result.text;
+    if (result.source !== 'ollama' && content) {
+      const tag = document.createElement('div');
+      tag.className = 'orion-glm-fallback-tag';
+      tag.textContent = `via ${result.model} (${result.providerLabel}) — Ollama unreachable`;
+      content.parentNode.appendChild(tag);
     }
   } catch (err) {
-    if (content) content.innerHTML = '<span style="color:#ff5f57;">Could not reach Ollama. Make sure it\'s running: <code>ollama serve</code></span>';
+    if (content) content.innerHTML = anyFallbackEnabled()
+      ? '<span style="color:#ff5f57;">Could not reach Ollama, and none of the enabled cloud fallbacks worked (check your API keys and usage limits in Settings).</span>'
+      : '<span style="color:#ff5f57;">Could not reach Ollama. Make sure it\'s running: <code>ollama serve</code></span> <span style="opacity:.7;">— or turn on a cloud fallback in Settings.</span>';
     return null;
   }
 
@@ -4810,7 +5263,7 @@ async function cmShowFollowUps(row, userText, aiText) {
   if (!content) return;
 
   try {
-    const res = await fetch('http://localhost:11434/api/chat', {
+    const res = await fetch(`${ollamaHost()}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -4950,14 +5403,24 @@ function cmRenderMembers() {
   order.forEach(key => {
     const persona = CONSTELLATION_PERSONALITIES[key];
     if (!persona) return;
-    const initial = persona.name.trim().charAt(0).toUpperCase();
     html += '<div class="cm-member">' +
-      '<span class="cm-avatar" style="background:' + cmAvatarColors[key] + ';">' + initial +
-        '<span class="cm-presence online"></span></span>' +
+      '<span class="cm-member-logo">' + cmPersonaLogoSVG(key, 22) + '</span>' +
       '<span class="cm-member-info"><span class="cm-member-name">' + persona.name + '</span></span>' +
     '</div>';
   });
   list.innerHTML = html;
+}
+
+// Swaps the generic chat-bubble icon on each constellation channel button
+// for that persona's real logo mark.
+function cmRenderChannelIcons() {
+  document.querySelectorAll('#cmChannelList .cm-channel[data-persona]').forEach(btn => {
+    const key = btn.dataset.persona;
+    const logo = cmPersonaLogoSVG(key, 16);
+    if (!logo) return;
+    const oldSvg = btn.querySelector('svg');
+    if (oldSvg) oldSvg.outerHTML = logo;
+  });
 }
 
 function cmHandleComposer(e) {
@@ -4970,7 +5433,6 @@ function cmHandleComposer(e) {
 document.querySelectorAll('#community-mode-panel .cm-channel').forEach(btn => {
   btn.addEventListener('click', () => cmSelectChannel(btn));
 });
-cmRenderMembers();
 {
   const ambientToggle = document.getElementById('cmAmbientToggle');
   if (ambientToggle) ambientToggle.checked = cmAmbientEnabled;
@@ -5129,7 +5591,7 @@ function orionOpenModelPicker(anchorBtn) {
   }
 
   // Try to fetch real models, still filtered to the active constellation's family
-  fetch('http://localhost:11434/api/tags')
+  fetch(`${ollamaHost()}/api/tags`)
     .then(r => r.json())
     .then(d => {
       const allModels = (d.models || []).map(m => m.name);
@@ -5278,6 +5740,30 @@ function orionSetChatModeSeg(mode, btn) {
 function orionToggleCustomize() {
   const panel = document.getElementById('orionCustomizePanel');
   const btn = document.getElementById('railCustomizeBtn');
+  // Settings and Customize share the same slide-out slot — only one open
+  // at a time, so closing one when opening the other avoids them stacking.
+  const settingsPanel = document.getElementById('orionSettingsPanel');
+  if (settingsPanel && settingsPanel.classList.contains('open')) {
+    settingsPanel.classList.remove('open');
+    const settingsBtn = document.getElementById('railSettingsBtn');
+    if (settingsBtn) settingsBtn.classList.remove('active');
+  }
+  const isOpen = panel.classList.toggle('open');
+  if (btn) btn.classList.toggle('active', isOpen);
+}
+
+function orionToggleSettings() {
+  const panel = document.getElementById('orionSettingsPanel');
+  if (!panel) return;
+  const btn = document.getElementById('railSettingsBtn');
+  // Settings and Customize share the same slide-out slot — only one open
+  // at a time, so closing one when opening the other avoids them stacking.
+  const customizePanel = document.getElementById('orionCustomizePanel');
+  if (customizePanel && customizePanel.classList.contains('open')) {
+    customizePanel.classList.remove('open');
+    const customizeBtn = document.getElementById('railCustomizeBtn');
+    if (customizeBtn) customizeBtn.classList.remove('active');
+  }
   const isOpen = panel.classList.toggle('open');
   if (btn) btn.classList.toggle('active', isOpen);
 }
@@ -5290,6 +5776,14 @@ function orionToggleSidebarCollapse() {
 function orionSetDarkMode(on) {
   document.body.classList.toggle('dark-mode', on);
   try { localStorage.setItem('AGENTIC ✦_dark', on ? '1' : '0'); } catch (e) { console.error('Failed to save dark mode pref:', e); }
+  const navBtn = document.getElementById('darkModeNavBtn');
+  if (navBtn) navBtn.classList.toggle('active', on);
+  const cb = document.getElementById('darkModeToggle');
+  if (cb) cb.checked = on;
+}
+
+function toggleDarkModeNav() {
+  orionSetDarkMode(!document.body.classList.contains('dark-mode'));
 }
 
 const ORION_LOGO_SVGS = {
@@ -5389,6 +5883,9 @@ const ORION_LOGO_SVGS = {
     `
   }
 };
+
+cmRenderMembers();
+cmRenderChannelIcons();
 
 // Per-constellation welcome screen copy — tagline + suggestion chips that
 // match each persona's voice and use case (set with Carina's, mirrored for
@@ -5518,14 +6015,18 @@ function orionRenderLogoOptionIcons() {
   try {
     if (localStorage.getItem('AGENTIC ✦_dark') === '1') {
       document.body.classList.add('dark-mode');
-      // Sync checkbox once DOM is ready
+      // Sync checkbox + nav button once DOM is ready
       window.addEventListener('DOMContentLoaded', function() {
         const cb = document.getElementById('darkModeToggle');
         if (cb) cb.checked = true;
+        const navBtn = document.getElementById('darkModeNavBtn');
+        if (navBtn) navBtn.classList.add('active');
       }, { once: true });
       // Also try immediately in case DOM is already ready
       const cb = document.getElementById('darkModeToggle');
       if (cb) cb.checked = true;
+      const navBtn = document.getElementById('darkModeNavBtn');
+      if (navBtn) navBtn.classList.add('active');
     }
   } catch (e) { console.error('Failed to restore dark mode pref:', e); }
 })();
@@ -5537,6 +6038,39 @@ function orionRenderLogoOptionIcons() {
   try { saved = localStorage.getItem('AGENTIC_BRAND_LOGO_V2'); } catch (e) { console.error('Failed to read logo pref:', e); }
   const key = (saved && ORION_LOGO_SVGS[saved]) ? saved : 'agentic';
   const apply = () => { orionRenderLogoOptionIcons(); orionSetLogo(key); };
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', apply, { once: true });
+  } else {
+    apply();
+  }
+})();
+
+// Restore Ollama host + all cloud fallback provider toggles/keys on load
+(function() {
+  const apply = () => {
+    const hostInput = document.getElementById('ollamaHostInput');
+    if (hostInput) hostInput.value = ollamaHost() === OLLAMA_DEFAULT_HOST ? '' : ollamaHost();
+
+    const whisperInput = document.getElementById('whisperHostInput');
+    if (whisperInput) whisperInput.value = whisperHost() === WHISPER_DEFAULT_HOST ? '' : whisperHost();
+    const kokoroInput = document.getElementById('kokoroHostInput');
+    if (kokoroInput) kokoroInput.value = kokoroHost() === KOKORO_DEFAULT_HOST ? '' : kokoroHost();
+
+    const voiceIdPrefixes = { agentic: 'Agentic', orion: 'Orion', carina: 'Carina', gemini: 'Gemini' };
+    Object.keys(voiceIdPrefixes).forEach(key => {
+      const el = document.getElementById('kokoroVoice' + voiceIdPrefixes[key] + 'Input');
+      if (el) el.value = kokoroVoiceFor(key) === KOKORO_VOICE_DEFAULTS[key] ? '' : kokoroVoiceFor(key);
+    });
+
+    const idPrefixes = { glm: 'glm', groq: 'groq', mistral: 'mistral', google: 'google', openrouter: 'openrouter' };
+    FALLBACK_PROVIDERS.forEach(p => {
+      const prefix = idPrefixes[p.id] || p.id;
+      const cb = document.getElementById(prefix + 'FallbackToggle');
+      if (cb) cb.checked = providerIsEnabled(p);
+      const keyInput = document.getElementById(prefix + 'ApiKeyInput');
+      if (keyInput) keyInput.value = providerGetApiKey(p);
+    });
+  };
   if (document.readyState === 'loading') {
     window.addEventListener('DOMContentLoaded', apply, { once: true });
   } else {
@@ -5955,7 +6489,7 @@ async function orionShowFollowUps(row, userText, aiText) {
   if (!msgContent) return;
 
   try {
-    const res = await fetch('http://localhost:11434/api/chat', {
+    const res = await fetch(`${ollamaHost()}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -6137,37 +6671,29 @@ async function orionSend() {
   ];
 
   orionAbortController = new AbortController();
+  const constellationKey = getActiveConstellationKey();
+  let dotsRemoved = false;
 
   try {
-    const res = await fetch('http://localhost:11434/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: orionSelectedModel, stream: true, messages, options: { num_predict: 2048 } }),
+    const { text: fullReply, source, providerLabel, model: usedModel } = await chatCompletionStream({
+      model: orionSelectedModel,
+      messages,
+      options: { num_predict: 2048 },
       signal: orionAbortController.signal,
-    });
-
-    if (!res.ok) throw new Error('Ollama error ' + res.status);
-
-    dots.remove();
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let fullReply = '';
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      const lines = decoder.decode(value, { stream: true }).split('\n').filter(Boolean);
-      for (const line of lines) {
-        try {
-          const evt = JSON.parse(line);
-          if (evt.message?.content) {
-            fullReply += evt.message.content;
-            orionRenderMarkdown(content, fullReply);
-            document.getElementById('orionMessages').scrollTop = document.getElementById('orionMessages').scrollHeight;
-          }
-        } catch {}
+      constellationKey,
+      onToken: (delta, soFar) => {
+        if (!dotsRemoved) { dots.remove(); dotsRemoved = true; }
+        orionRenderMarkdown(content, soFar);
+        document.getElementById('orionMessages').scrollTop = document.getElementById('orionMessages').scrollHeight;
       }
+    });
+    if (!dotsRemoved) { dots.remove(); dotsRemoved = true; }
+
+    if (source !== 'ollama') {
+      const tag = document.createElement('div');
+      tag.className = 'orion-glm-fallback-tag';
+      tag.textContent = `via ${usedModel} (${providerLabel}) — Ollama unreachable`;
+      content.parentNode.insertBefore(tag, content.nextSibling);
     }
 
     orionHistory.push({ role: 'assistant', content: fullReply });
@@ -6176,14 +6702,16 @@ async function orionSend() {
     orionShowFollowUps(row, text, fullReply);
 
   } catch (err) {
-    dots.remove();
+    if (!dotsRemoved) { dots.remove(); dotsRemoved = true; }
     if (err.name === 'AbortError') {
       if (content.textContent.trim() === '') {
         content.innerHTML = '<span style="color:#888;font-style:italic;">Stopped.</span>';
       }
       // Keep whatever partial reply was rendered
+    } else if (anyFallbackEnabled()) {
+      content.innerHTML = '<span style="color:#ff5f57;">Could not reach Ollama, and none of the enabled cloud fallbacks worked (check your API keys and usage limits in Settings). ' + (err.message || '') + '</span>';
     } else {
-      content.innerHTML = '<span style="color:#ff5f57;">Could not reach Ollama. Make sure it\'s running: <code>ollama serve</code></span>';
+      content.innerHTML = '<span style="color:#ff5f57;">Could not reach Ollama. Make sure it\'s running: <code>ollama serve</code></span> <span style="opacity:.7;">— or turn on a cloud fallback in Settings.</span>';
     }
   }
 
@@ -6906,8 +7434,8 @@ function showExtensionLauncher() {
   if (launcher) {
     launcher.style.display = 'grid';
     launcher.innerHTML = Object.entries(EXTENSION_META).map(([id, meta]) => `
-      <button class="extension-card" onclick="openExtension('${id}')">
-        <span class="extension-card-name">${meta.title}</span>
+      <button class="extension-card" onclick="openExtension('${id}')" title="${meta.title}" aria-label="${meta.title}">
+        <span class="extension-card-icon">${meta.icon || ''}</span>
       </button>
     `).join('');
   }
@@ -7006,6 +7534,140 @@ function closeExtensionModal() {
         <span>Gemini</span>
       </button>
     </div>
+  </div>
+</div>
+
+<!-- ── Settings panel — separate from Customize; houses backend/connection
+     settings (currently: GLM fallback via z.ai) rather than appearance
+     preferences. ── -->
+<div class="orion-customize-panel" id="orionSettingsPanel">
+  <div class="orion-customize-header">
+    <h3>Settings</h3>
+    <button type="button" class="orion-customize-close" onclick="orionToggleSettings()" aria-label="Close settings panel">✕</button>
+  </div>
+
+  <div class="orion-customize-row" style="flex-direction:column; align-items:stretch;">
+    <div>
+      <div class="orion-customize-label">Ollama host</div>
+      <div class="orion-customize-sub">Point at a remote/cloud Ollama instance instead of this machine — tried before any cloud fallback below</div>
+    </div>
+    <input type="text" id="ollamaHostInput" class="orion-glm-key-input" placeholder="http://localhost:11434" autocomplete="off" onchange="ollamaSetHost(this.value)">
+  </div>
+
+  <div class="orion-customize-row" style="flex-direction:column; align-items:stretch;">
+    <div>
+      <div class="orion-customize-label">Whisper host (speech-to-text)</div>
+      <div class="orion-customize-sub">Voice mode transcription server — point at a remote box instead of this machine if that's where it runs</div>
+    </div>
+    <input type="text" id="whisperHostInput" class="orion-glm-key-input" placeholder="http://localhost:5051" autocomplete="off" onchange="whisperSetHost(this.value)">
+  </div>
+
+  <div class="orion-customize-row" style="flex-direction:column; align-items:stretch;">
+    <div>
+      <div class="orion-customize-label">Kokoro host (text-to-speech)</div>
+      <div class="orion-customize-sub">Voice mode speech synthesis server — same idea, remote-friendly</div>
+    </div>
+    <input type="text" id="kokoroHostInput" class="orion-glm-key-input" placeholder="http://localhost:5050" autocomplete="off" onchange="kokoroSetHost(this.value)">
+  </div>
+
+  <div class="orion-customize-row" style="flex-direction:column; align-items:stretch;">
+    <div>
+      <div class="orion-customize-label">Kokoro voices per constellation</div>
+      <div class="orion-customize-sub">Which Kokoro voice ID speaks for each persona in Voice mode — match whatever voice pack your Kokoro server actually has loaded</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:6px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="width:60px; flex-shrink:0; font-size:12.5px; color:var(--text-secondary);">Agentic</span>
+        <input type="text" id="kokoroVoiceAgenticInput" class="orion-glm-key-input" placeholder="af_heart" autocomplete="off" onchange="kokoroSetVoice('agentic', this.value)">
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="width:60px; flex-shrink:0; font-size:12.5px; color:var(--text-secondary);">Orion</span>
+        <input type="text" id="kokoroVoiceOrionInput" class="orion-glm-key-input" placeholder="am_michael" autocomplete="off" onchange="kokoroSetVoice('orion', this.value)">
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="width:60px; flex-shrink:0; font-size:12.5px; color:var(--text-secondary);">Carina</span>
+        <input type="text" id="kokoroVoiceCarinaInput" class="orion-glm-key-input" placeholder="af_bella" autocomplete="off" onchange="kokoroSetVoice('carina', this.value)">
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="width:60px; flex-shrink:0; font-size:12.5px; color:var(--text-secondary);">Gemini</span>
+        <input type="text" id="kokoroVoiceGeminiInput" class="orion-glm-key-input" placeholder="af_nicole" autocomplete="off" onchange="kokoroSetVoice('gemini', this.value)">
+      </div>
+    </div>
+  </div>
+
+  <div class="orion-customize-row" style="flex-direction:column; align-items:stretch;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <div class="orion-customize-label">GLM fallback (z.ai)</div>
+        <div class="orion-customize-sub">If Ollama can't be reached, fall back to a GLM model by z.ai — a different one per constellation</div>
+      </div>
+      <label class="orion-toggle">
+        <input type="checkbox" id="glmFallbackToggle" onchange="providerSetEnabledById('glm', this.checked)">
+        <span class="orion-toggle-slider"></span>
+      </label>
+    </div>
+    <input type="password" id="glmApiKeyInput" class="orion-glm-key-input" placeholder="z.ai API key" autocomplete="off" onchange="providerSetKeyById('glm', this.value)">
+    <div class="orion-glm-model-map">Orion → glm-4.6 · Carina → glm-4.5 · Gemini → glm-4.5-air · Agentic → glm-4.5-flash</div>
+  </div>
+
+  <div class="orion-customize-row" style="flex-direction:column; align-items:stretch;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <div class="orion-customize-label">Groq fallback</div>
+        <div class="orion-customize-sub">Fast hosting for real Llama/Qwen/Gemma models — overlaps Orion, Carina, and Gemini's local families</div>
+      </div>
+      <label class="orion-toggle">
+        <input type="checkbox" id="groqFallbackToggle" onchange="providerSetEnabledById('groq', this.checked)">
+        <span class="orion-toggle-slider"></span>
+      </label>
+    </div>
+    <input type="password" id="groqApiKeyInput" class="orion-glm-key-input" placeholder="Groq API key" autocomplete="off" onchange="providerSetKeyById('groq', this.value)">
+    <div class="orion-glm-model-map">Orion → qwen-2.5-coder-32b · Carina → llama-3.3-70b-versatile · Gemini → gemma2-9b-it · Agentic → llama-3.1-8b-instant</div>
+  </div>
+
+  <div class="orion-customize-row" style="flex-direction:column; align-items:stretch;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <div class="orion-customize-label">Mistral fallback</div>
+        <div class="orion-customize-sub">Official Mistral API — exact model family match for Carina, and Codestral is a strong pick for Orion</div>
+      </div>
+      <label class="orion-toggle">
+        <input type="checkbox" id="mistralFallbackToggle" onchange="providerSetEnabledById('mistral', this.checked)">
+        <span class="orion-toggle-slider"></span>
+      </label>
+    </div>
+    <input type="password" id="mistralApiKeyInput" class="orion-glm-key-input" placeholder="Mistral API key" autocomplete="off" onchange="providerSetKeyById('mistral', this.value)">
+    <div class="orion-glm-model-map">Orion → codestral-latest · Carina → mistral-large-latest · Gemini → mistral-small-latest · Agentic → mistral-small-latest</div>
+  </div>
+
+  <div class="orion-customize-row" style="flex-direction:column; align-items:stretch;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <div class="orion-customize-label">Google AI fallback</div>
+        <div class="orion-customize-sub">Real Gemini models from Google AI Studio — a fitting fallback for the Gemini constellation specifically</div>
+      </div>
+      <label class="orion-toggle">
+        <input type="checkbox" id="googleFallbackToggle" onchange="providerSetEnabledById('google', this.checked)">
+        <span class="orion-toggle-slider"></span>
+      </label>
+    </div>
+    <input type="password" id="googleApiKeyInput" class="orion-glm-key-input" placeholder="Google AI Studio API key" autocomplete="off" onchange="providerSetKeyById('google', this.value)">
+    <div class="orion-glm-model-map">All constellations → gemini-2.0-flash</div>
+  </div>
+
+  <div class="orion-customize-row" style="border-bottom:none; flex-direction:column; align-items:stretch;">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <div class="orion-customize-label">OpenRouter fallback</div>
+        <div class="orion-customize-sub">Catch-all router behind one key — last resort in the chain if every other fallback above fails</div>
+      </div>
+      <label class="orion-toggle">
+        <input type="checkbox" id="openrouterFallbackToggle" onchange="providerSetEnabledById('openrouter', this.checked)">
+        <span class="orion-toggle-slider"></span>
+      </label>
+    </div>
+    <input type="password" id="openrouterApiKeyInput" class="orion-glm-key-input" placeholder="OpenRouter API key" autocomplete="off" onchange="providerSetKeyById('openrouter', this.value)">
+    <div class="orion-glm-model-map">Orion → qwen/qwen-2.5-coder-32b-instruct · Carina → mistralai/mistral-large · Gemini → google/gemma-2-9b-it · Agentic → meta-llama/llama-3.1-8b-instruct:free</div>
   </div>
 </div>
 
