@@ -28,4 +28,13 @@ ollama serve
 ./Agentic.sh
 ```
 
+## Installation
+
+Download the latest [`agentic.flatpak`](https://github.com/orion110/Agentic/blob/main/agentic-flatpak.zip) and run:
+
+```bash
+flatpak install agentic.flatpak
+```
+
+
 [![hello.webp](https://i.postimg.cc/YSNX95wH/hello.webp)](https://postimg.cc/d71RNS1H)
