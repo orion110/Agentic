@@ -1357,6 +1357,151 @@
     display: none;
   }
 
+  body.mode-dictate .hero,
+  body.mode-dictate .terminal-section { display: none; }
+
+  /* ── DICTATE MODE ── */
+  #dictate-mode-panel {
+    display: none;
+    position: fixed;
+    top: 52px;
+    left: 0; right: 0; bottom: 0;
+    z-index: 80;
+    background: #0f0f0f;
+    color: #e8e8e8;
+    font-family: var(--font);
+  }
+  #dictate-mode-panel.active { display: flex; flex-direction: column; }
+  body.mode-dictate { overflow: hidden; }
+
+  .dictate-topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+  }
+  .dictate-topbar .dictate-title { font-weight: 600; font-size: 14px; }
+  .dictate-topbar .dictate-sub { font-size: 11px; color: rgba(255,255,255,0.4); }
+  .dictate-status {
+    margin-left: auto;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dictate-status .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    transition: background .2s;
+  }
+  .dictate-status.live .dot { background: #ff5f57; animation: dictatePulse 1s ease-in-out infinite; }
+  @keyframes dictatePulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+
+  .dictate-columns {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+  }
+  .dictate-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .dictate-col + .dictate-col { border-left: 1px solid rgba(255,255,255,0.08); }
+  .dictate-col-header {
+    padding: 12px 18px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.7);
+    flex-shrink: 0;
+  }
+  .dictate-col-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 18px 18px;
+    font-size: 15px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  #dictateTranscript { color: #f0f0f0; outline: none; }
+  #dictateTranscript:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(255,255,255,0.3);
+  }
+  #dictateResponse { color: #d8d8d8; }
+  #dictateResponse:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(255,255,255,0.3);
+  }
+  #dictateResponse code {
+    background: rgba(255,255,255,0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    font-size: 13px;
+  }
+  #dictateResponse pre {
+    background: rgba(255,255,255,0.06);
+    padding: 10px 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 8px 0;
+  }
+
+  .dictate-bottombar {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+  }
+  .dictate-bottombar .dictate-left-actions,
+  .dictate-bottombar .dictate-right-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .dictate-bottombar .dictate-right-actions { margin-left: auto; }
+  .dictate-btn {
+    background: rgba(255,255,255,0.06);
+    color: #e8e8e8;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 5px;
+    padding: 7px 14px;
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dictate-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+  .dictate-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.22); }
+  .dictate-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .dictate-btn.dictate-primary {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+  }
+  .dictate-btn.dictate-primary:hover { background: #3b74f0; }
+  .dictate-btn.dictate-primary.recording {
+    background: #dc2626;
+    border-color: #dc2626;
+  }
+  .dictate-btn.dictate-primary.recording:hover { background: #ef4444; }
+
+  @media (max-width: 760px) {
+    .dictate-columns { flex-direction: column; }
+    .dictate-col + .dictate-col { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); }
+    .dictate-bottombar { flex-wrap: wrap; gap: 8px; }
+  }
+
   /* ── COMMUNITY MODE ──
      Redesigned to match the terminal/directory language of the rest of
      Agentic: monochrome, hairline borders, square (not round) surfaces,
@@ -2671,6 +2816,9 @@
     <button type="button" class="mode-btn mode-btn-icon" id="communityModeBtn" onclick="switchMode('community')" aria-label="Community" title="Community">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     </button>
+    <button type="button" class="mode-btn mode-btn-icon" id="dictateModeBtn" onclick="switchMode('dictate')" aria-label="Dictate" title="Dictate">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -2894,6 +3042,48 @@
     <!-- Populated at runtime by cmRenderMembers() from CONSTELLATION_PERSONALITIES -->
   </div>
 
+</div>
+
+<!-- ── DICTATE MODE PANEL ── -->
+<div id="dictate-mode-panel">
+  <div class="dictate-topbar">
+    <div>
+      <div class="dictate-title">Dictate</div>
+      <div class="dictate-sub">Voice-to-text &amp; local AI</div>
+    </div>
+    <div class="dictate-status" id="dictateStatus"><span class="dot"></span><span id="dictateStatusText">Idle</span></div>
+  </div>
+
+  <div class="dictate-columns">
+    <div class="dictate-col">
+      <div class="dictate-col-header">Transcript</div>
+      <div class="dictate-col-body" id="dictateTranscript" contenteditable="true" data-placeholder="Tap Dictate and start speaking…"></div>
+    </div>
+    <div class="dictate-col">
+      <div class="dictate-col-header">AI response</div>
+      <div class="dictate-col-body" id="dictateResponse" data-placeholder="Ask AI to see a response here…"></div>
+    </div>
+  </div>
+
+  <div class="dictate-bottombar">
+    <div class="dictate-left-actions">
+      <button type="button" class="dictate-btn dictate-primary" id="dictateMicBtn" onclick="dictateToggleMic()" title="Start/stop dictation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        <span id="dictateMicLabel">Dictate</span>
+      </button>
+      <button type="button" class="dictate-btn" onclick="dictateCopy()" title="Copy transcript">Copy</button>
+      <button type="button" class="dictate-btn" onclick="dictateClear()" title="Clear transcript and response">Clear</button>
+    </div>
+    <div class="dictate-right-actions">
+      <button type="button" class="dictate-btn" onclick="dictateDownload()" title="Download transcript and response">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download
+      </button>
+      <button type="button" class="dictate-btn" onclick="dictateStop()" title="Stop speaking / generating">Stop</button>
+      <button type="button" class="dictate-btn" onclick="dictateSpeak()" title="Read the AI response aloud">Speak</button>
+      <button type="button" class="dictate-btn dictate-primary" onclick="dictateAskAI()" id="dictateAskBtn" title="Send transcript to local AI">Ask AI</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -5029,40 +5219,283 @@ function switchMode(mode) {
   const termBtn = document.getElementById('termModeBtn');
   const chatBtn = document.getElementById('chatModeBtn');
   const communityBtn = document.getElementById('communityModeBtn');
+  const dictateBtn = document.getElementById('dictateModeBtn');
   const chatPanel = document.getElementById('chat-mode-panel');
   const communityPanel = document.getElementById('community-mode-panel');
+  const dictatePanel = document.getElementById('dictate-mode-panel');
   const termInput = document.getElementById('termInput');
   const orionInput = document.getElementById('orion-input');
   const isChat = mode === 'chat';
   const isCommunity = mode === 'community';
-  const isTerminal = !isChat && !isCommunity;
+  const isDictate = mode === 'dictate';
+  const isTerminal = !isChat && !isCommunity && !isDictate;
 
   closeVoiceMode();
+  if (!isDictate) dictateStopMic();
 
   if (!termBtn || !chatBtn || !chatPanel) return;
 
   termBtn.classList.toggle('active', isTerminal);
   chatBtn.classList.toggle('active', isChat);
   communityBtn?.classList.toggle('active', isCommunity);
+  dictateBtn?.classList.toggle('active', isDictate);
   termBtn.setAttribute('aria-pressed', String(isTerminal));
   chatBtn.setAttribute('aria-pressed', String(isChat));
   communityBtn?.setAttribute('aria-pressed', String(isCommunity));
+  dictateBtn?.setAttribute('aria-pressed', String(isDictate));
   document.body.classList.toggle('mode-chat', isChat);
   document.body.classList.toggle('mode-community', isCommunity);
+  document.body.classList.toggle('mode-dictate', isDictate);
   document.body.classList.toggle('mode-terminal', isTerminal);
 
   chatPanel.classList.toggle('active', isChat);
   communityPanel?.classList.toggle('active', isCommunity);
+  dictatePanel?.classList.toggle('active', isDictate);
 
   if (isChat) {
     orionRenderSidebar();
     requestAnimationFrame(() => orionInput?.focus());
   } else if (isCommunity) {
     requestAnimationFrame(() => document.getElementById('cmComposerInput')?.focus());
+  } else if (isDictate) {
+    requestAnimationFrame(() => document.getElementById('dictateTranscript')?.focus());
   } else {
     window.scrollTo(0, 0);
     requestAnimationFrame(() => termInput?.focus());
   }
+}
+
+// ── DICTATE MODE ──
+// Browser-native voice-to-text (Web Speech API) + local Ollama AI + text-to-speech,
+// with copy/clear/download utilities. No server round-trip is needed for dictation
+// itself — it runs entirely in the browser.
+let dictateRecognition = null;
+let dictateListening = false;
+let dictateAbortController = null;
+let dictateBusy = false;
+
+function dictateSetStatus(text, live) {
+  const el = document.getElementById('dictateStatusText');
+  const wrap = document.getElementById('dictateStatus');
+  if (el) el.textContent = text;
+  if (wrap) wrap.classList.toggle('live', !!live);
+}
+
+function dictateGetRecognition() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return null;
+  if (dictateRecognition) return dictateRecognition;
+  const rec = new SR();
+  rec.continuous = true;
+  rec.interimResults = true;
+  rec.lang = (navigator.language || 'en-US');
+
+  let finalText = '';
+
+  rec.onstart = () => {
+    dictateListening = true;
+    dictateSetStatus('Listening…', true);
+    const btn = document.getElementById('dictateMicBtn');
+    const label = document.getElementById('dictateMicLabel');
+    btn?.classList.add('recording');
+    if (label) label.textContent = 'Stop';
+  };
+
+  rec.onresult = (event) => {
+    const transcriptEl = document.getElementById('dictateTranscript');
+    if (!transcriptEl) return;
+    // Rebuild finalText from all final results each pass, and append the
+    // current interim result so the user sees live feedback while speaking.
+    let interim = '';
+    finalText = '';
+    for (let i = 0; i < event.results.length; i++) {
+      const res = event.results[i];
+      if (res.isFinal) finalText += res[0].transcript;
+      else interim += res[0].transcript;
+    }
+    transcriptEl.textContent = (finalText + interim).trim();
+    // Keep the caret/scroll pinned to the end while dictating.
+    transcriptEl.scrollTop = transcriptEl.scrollHeight;
+  };
+
+  rec.onerror = (event) => {
+    dictateListening = false;
+    const btn = document.getElementById('dictateMicBtn');
+    const label = document.getElementById('dictateMicLabel');
+    btn?.classList.remove('recording');
+    if (label) label.textContent = 'Dictate';
+    if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+      dictateSetStatus('Mic permission denied', false);
+    } else if (event.error === 'no-speech') {
+      dictateSetStatus('Idle', false);
+    } else {
+      dictateSetStatus('Mic error: ' + event.error, false);
+    }
+  };
+
+  rec.onend = () => {
+    dictateListening = false;
+    const btn = document.getElementById('dictateMicBtn');
+    const label = document.getElementById('dictateMicLabel');
+    btn?.classList.remove('recording');
+    if (label) label.textContent = 'Dictate';
+    if (!dictateBusy) dictateSetStatus('Idle', false);
+  };
+
+  dictateRecognition = rec;
+  return rec;
+}
+
+function dictateToggleMic() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    dictateSetStatus('Speech recognition not supported in this browser', false);
+    showToast && showToast('Voice dictation needs Chrome, Edge, or Safari');
+    return;
+  }
+  const rec = dictateGetRecognition();
+  if (!rec) return;
+  if (dictateListening) {
+    rec.stop();
+  } else {
+    try { rec.start(); } catch (e) { /* already started */ }
+  }
+}
+
+function dictateStopMic() {
+  if (dictateRecognition && dictateListening) {
+    try { dictateRecognition.stop(); } catch (e) {}
+  }
+}
+
+function dictateCopy() {
+  const transcriptEl = document.getElementById('dictateTranscript');
+  const text = transcriptEl ? transcriptEl.textContent : '';
+  if (!text.trim()) return;
+  navigator.clipboard?.writeText(text).then(() => {
+    showToast && showToast('Transcript copied');
+  }).catch(() => {
+    showToast && showToast('Could not copy — select and copy manually');
+  });
+}
+
+function dictateClear() {
+  const transcriptEl = document.getElementById('dictateTranscript');
+  const responseEl = document.getElementById('dictateResponse');
+  if (transcriptEl) transcriptEl.textContent = '';
+  if (responseEl) responseEl.innerHTML = '';
+  dictateSetStatus('Idle', false);
+}
+
+function dictateStop() {
+  // Stops mic dictation, any in-flight AI request, and any speech playback.
+  dictateStopMic();
+  if (dictateAbortController) {
+    dictateAbortController.abort();
+    dictateAbortController = null;
+  }
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  dictateBusy = false;
+  const askBtn = document.getElementById('dictateAskBtn');
+  if (askBtn) { askBtn.disabled = false; askBtn.textContent = 'Ask AI'; }
+  dictateSetStatus('Idle', false);
+}
+
+function dictateSpeak() {
+  const responseEl = document.getElementById('dictateResponse');
+  const text = responseEl ? responseEl.textContent : '';
+  if (!text.trim()) return;
+  if (!window.speechSynthesis) {
+    showToast && showToast('Speech synthesis not supported in this browser');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = navigator.language || 'en-US';
+  utter.onstart = () => dictateSetStatus('Speaking…', true);
+  utter.onend = () => dictateSetStatus('Idle', false);
+  utter.onerror = () => dictateSetStatus('Idle', false);
+  window.speechSynthesis.speak(utter);
+}
+
+async function dictateAskAI() {
+  if (dictateBusy) return;
+  const transcriptEl = document.getElementById('dictateTranscript');
+  const responseEl = document.getElementById('dictateResponse');
+  const askBtn = document.getElementById('dictateAskBtn');
+  const text = transcriptEl ? transcriptEl.textContent.trim() : '';
+  if (!text) {
+    dictateSetStatus('Dictate something first', false);
+    return;
+  }
+
+  dictateStopMic();
+  dictateBusy = true;
+  if (askBtn) { askBtn.disabled = true; askBtn.textContent = 'Thinking…'; }
+  dictateSetStatus('Asking AI…', true);
+  if (responseEl) { responseEl.innerHTML = ''; responseEl.setAttribute('data-placeholder', ''); }
+
+  dictateAbortController = new AbortController();
+  const messages = [
+    { role: 'system', content: buildSystemPrompt() },
+    { role: 'user', content: text }
+  ];
+
+  try {
+    const { text: fullReply } = await chatCompletionStream({
+      model: orionSelectedModel,
+      messages,
+      options: { num_predict: 2048 },
+      signal: dictateAbortController.signal,
+      constellationKey: getActiveConstellationKey(),
+      onToken: (delta, soFar) => {
+        if (responseEl) orionRenderMarkdown(responseEl, soFar);
+      }
+    });
+    if (responseEl && fullReply) orionRenderMarkdown(responseEl, fullReply);
+    dictateSetStatus('Idle', false);
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      dictateSetStatus('Stopped', false);
+    } else if (responseEl) {
+      responseEl.innerHTML = '<span style="color:#ff6b6b;">Could not reach Ollama. Make sure it\'s running: <code>ollama serve</code></span>';
+      dictateSetStatus('Error', false);
+    }
+  }
+
+  dictateBusy = false;
+  dictateAbortController = null;
+  if (askBtn) { askBtn.disabled = false; askBtn.textContent = 'Ask AI'; }
+}
+
+function dictateDownload() {
+  const transcriptEl = document.getElementById('dictateTranscript');
+  const responseEl = document.getElementById('dictateResponse');
+  const transcript = transcriptEl ? transcriptEl.textContent.trim() : '';
+  const response = responseEl ? responseEl.textContent.trim() : '';
+  if (!transcript && !response) {
+    showToast && showToast('Nothing to download yet');
+    return;
+  }
+  const stamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
+  const content =
+    'Agentic ✦ — Dictate\n' +
+    `Saved: ${stamp}\n` +
+    '\n---- Transcript ----\n' +
+    (transcript || '(empty)') +
+    '\n\n---- AI response ----\n' +
+    (response || '(empty)') +
+    '\n';
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `dictate-${Date.now()}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast && showToast('Downloaded');
 }
 
 // ── COMMUNITY MODE LOGIC ──
