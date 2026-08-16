@@ -6,10 +6,8 @@
 - File uploads
 - Chat history & projects
 
-[![agentic.png](https://i.postimg.cc/jj2YY3X3/agentic.png)](https://postimg.cc/68kmd0FC)
+[![Untitled.png](https://i.postimg.cc/9MMSwsp6/Untitled.png)](https://postimg.cc/nsyT6RN2)
 
-
-[![Untitled.png](https://i.postimg.cc/bJ2XsG41/Untitled.png)](https://postimg.cc/0MxX4NkN)
 
   
 
