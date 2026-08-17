@@ -1,4 +1,4 @@
-[![image.png](https://i.postimg.cc/K8BWKc30/image.png)](https://postimg.cc/87k49SHv)
+[![Agentic-hero.png](https://i.postimg.cc/6pWDN7vF/Agentic-hero.png)](https://postimg.cc/dLfW2Vn9)
 ## Features
 - Terminal mode with streaming responses
 - Modern chat interface 
