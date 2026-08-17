@@ -1,4 +1,4 @@
-[![Agentic-hero.png](https://i.postimg.cc/6pWDN7vF/Agentic-hero.png)](https://postimg.cc/dLfW2Vn9)
+[![Agentic.jpg](https://i.postimg.cc/ZYP7Kb4R/Agentic.jpg)](https://postimg.cc/DmZdxKWk)
 ## Features
 - Terminal mode with streaming responses
 - Modern chat interface 
@@ -34,4 +34,4 @@ flatpak install agentic.flatpak
 ```
 
 
-[![hello.webp](https://i.postimg.cc/YSNX95wH/hello.webp)](https://postimg.cc/d71RNS1H)
+[![Agentic-hero.png](https://i.postimg.cc/6pWDN7vF/Agentic-hero.png)](https://postimg.cc/dLfW2Vn9)
