@@ -32,4 +32,4 @@ flatpak install agentic.flatpak
 ```
 
 
-[![Agentic-hero.png](https://i.postimg.cc/6pWDN7vF/Agentic-hero.png)](https://postimg.cc/dLfW2Vn9)
+
