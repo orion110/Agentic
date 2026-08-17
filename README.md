@@ -27,8 +27,7 @@ ollama serve
 
 ## Installation
 
-Download the latest [`agentic.flatpak`](https://github.com/orion110/Agentic/blob/main/agentic-flatpak.zip) and run:
-
+[![Agentic-hero.png](https://i.postimg.cc/6pWDN7vF/Agentic-hero.png)](https://postimg.cc/dLfW2Vn9)
 ```bash
 flatpak install agentic.flatpak
 ```
