@@ -5,9 +5,9 @@
 - Voice input and speech output
 - File uploads
 - Chat history & projects
-
-[![githbu.png](https://i.postimg.cc/rwNG8tqM/githbu.png)](https://postimg.cc/K143fjKH)
   
+
+[![githbu.png](https://i.postimg.cc/rwNG8tqM/githbu.png)](https://postimg.cc/K143fjKH)  
 
 
 ## How to Run
