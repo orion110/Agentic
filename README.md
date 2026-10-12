@@ -6,8 +6,7 @@
 - File uploads
 - Chat history & projects
 
-[![Untitled.png](https://i.postimg.cc/zXCrNZPT/Untitled.png)](https://postimg.cc/yk85h5KN)
-
+[![githbu.png](https://i.postimg.cc/rwNG8tqM/githbu.png)](https://postimg.cc/K143fjKH)
   
 
 
